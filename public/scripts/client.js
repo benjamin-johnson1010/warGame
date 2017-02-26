@@ -5,6 +5,8 @@ var A = 14;
 var K = 13;
 var Q = 12;
 var J = 11;
+var i = 0;
+var j = 0;
 $(document).ready(function(){
   var deck = [2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,
   9,9,9,9,10,10,10,10,J,J,J,J,Q,Q,Q,Q,K,K,K,K,A,A,A,A];
@@ -21,39 +23,41 @@ console.log(deckOne, deckTwo);
 
   $('.flip').on('click', function(){
     console.log('in flip');
-
+    console.log(i);
+    console.log(j);
+    console.log(deckOne.length);
+    console.log(deckTwo.length);
     var move;
-    $('#cardOne').html(deckOne[0]);
-    $('#cardTwo').html(deckTwo[0]);
-    if(deckOne[0] > deckTwo[0])
+    $('#cardOne').html(deckOne[i]);
+    $('#cardTwo').html(deckTwo[j]);
+    if(deckOne[i] > deckTwo[j])
     {
-      move = deckOne.shift();
-      deckOne.push(move);
-      move = deckTwo.shift();
-      deckOne.push(move);
-    }
-    else if(deckOne[0] < deckTwo[0]){
-      move = deckTwo.shift();
-      deckTwo.push(move);
-      move = deckOne.shift();
-      deckTwo.push(move);
-    }
-    else{
-      $('#cardOne').html(deckOne[0] + ' ' + deckOne[1] + ' ' + deckOne[2] + ' ' + deckOne[3]);
-      $('#cardTwo').html(deckTwo[0] + ' ' + deckTwo[1] + ' ' + deckTwo[2] + ' ' + deckTwo[3]);
-      if(deckOne[3] > deckTwo[3])
+      move = deckTwo.shift(j);
+      deckOne.splice(1,0,move);
+      if(i + 2 >= deckOne.length)
       {
-        move = deckOne.shift();
-        deckOne.push(move);
-        move = deckTwo.shift();
-        deckOne.push(move);
+        console.log('reset');
+        i = 0;
       }
       else{
-        move = deckTwo.shift();
-        deckTwo.push(move);
-        move = deckOne.shift();
-        deckTwo.push(move);
+      i += 2;
+    }
+    }
+    else if(deckOne[i] < deckTwo[j]){
+      move = deckOne.shift(i);
+      deckTwo.splice(1,0,move);
+      if(j + 2 >= deckTwo.length)
+      {
+        console.log('reset');
+        j = 0;
       }
+      else{
+      j += 2;
+    }
+  }
+    else{
+      j++;
+      i++;
     }
     console.log(deckOne);
     console.log(deckTwo);
