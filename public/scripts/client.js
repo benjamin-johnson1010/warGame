@@ -1,23 +1,30 @@
 console.log('sourced');
 var deckOne;
 var deckTwo;
+var A = 14;
+var K = 13;
+var Q = 12;
+var J = 11;
 $(document).ready(function(){
-  var deck = [1,2,3,4,5,6];
+  var deck = [2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,
+  9,9,9,9,10,10,10,10,J,J,J,J,Q,Q,Q,Q,K,K,K,K,A,A,A,A];
   console.log('in doc ready');
   //begin a new game of war
   $('#newGame').on('click',function(){
     console.log('in newGame');
     deck = shuffle(deck);
-    console.log(deck);
     var split = Math.ceil(deck.length / 2);
 deckOne = deck.splice(0,split);
 deckTwo = deck;
 console.log(deckOne, deckTwo);
   });
+
   $('.flip').on('click', function(){
     console.log('in flip');
-    console.log(deckOne[0]);
+
     var move;
+    $('#cardOne').html(deckOne[0]);
+    $('#cardTwo').html(deckTwo[0]);
     if(deckOne[0] > deckTwo[0])
     {
       move = deckOne.shift();
@@ -25,11 +32,28 @@ console.log(deckOne, deckTwo);
       move = deckTwo.shift();
       deckOne.push(move);
     }
-    else{
+    else if(deckOne[0] < deckTwo[0]){
       move = deckTwo.shift();
       deckTwo.push(move);
       move = deckOne.shift();
       deckTwo.push(move);
+    }
+    else{
+      $('#cardOne').html(deckOne[0] + ' ' + deckOne[1] + ' ' + deckOne[2] + ' ' + deckOne[3]);
+      $('#cardTwo').html(deckTwo[0] + ' ' + deckTwo[1] + ' ' + deckTwo[2] + ' ' + deckTwo[3]);
+      if(deckOne[3] > deckTwo[3])
+      {
+        move = deckOne.shift();
+        deckOne.push(move);
+        move = deckTwo.shift();
+        deckOne.push(move);
+      }
+      else{
+        move = deckTwo.shift();
+        deckTwo.push(move);
+        move = deckOne.shift();
+        deckTwo.push(move);
+      }
     }
     console.log(deckOne);
     console.log(deckTwo);
@@ -37,7 +61,6 @@ console.log(deckOne, deckTwo);
   });
 });
 function shuffle(deck){
-  console.log(deck);
     var i = 0,
        j = 0,
        temp = null;
