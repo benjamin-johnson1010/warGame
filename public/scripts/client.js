@@ -23,37 +23,35 @@ console.log(deckOne, deckTwo);
 
   $('.flip').on('click', function(){
     console.log('in flip');
+    var move;
     console.log(i);
     console.log(j);
     console.log(deckOne.length);
     console.log(deckTwo.length);
-    var move;
+    if(i + 2 >= deckOne.length)
+    {
+      console.log('reset deckOne');
+      i = 0;
+    }
+    if(j + 2 >= deckTwo.length)
+    {
+      console.log('reset deckTwo');
+      j = 0;
+    }
     $('#cardOne').html(deckOne[i]);
     $('#cardTwo').html(deckTwo[j]);
     if(deckOne[i] > deckTwo[j])
     {
       move = deckTwo.shift(j);
       deckOne.splice(1,0,move);
-      if(i + 2 >= deckOne.length)
-      {
-        console.log('reset');
-        i = 0;
-      }
-      else{
+
       i += 2;
-    }
+
     }
     else if(deckOne[i] < deckTwo[j]){
       move = deckOne.shift(i);
       deckTwo.splice(1,0,move);
-      if(j + 2 >= deckTwo.length)
-      {
-        console.log('reset');
-        j = 0;
-      }
-      else{
       j += 2;
-    }
   }
     else{
       j++;
