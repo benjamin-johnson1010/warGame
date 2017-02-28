@@ -44,13 +44,14 @@ console.log(deckOne, deckTwo);
     {
       move = deckTwo.shift(j);
       deckOne.splice(1,0,move);
-
+      console.log("player One wins hand");
       i += 2;
 
     }
     else if(deckOne[i] < deckTwo[j]){
       move = deckOne.shift(i);
       deckTwo.splice(1,0,move);
+      console.log("player Two wins hand");
       j += 2;
   }
     else{
