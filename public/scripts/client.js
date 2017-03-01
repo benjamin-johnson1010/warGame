@@ -40,6 +40,7 @@ console.log(deckOne, deckTwo);
     }
     $('#cardOne').html(deckOne[i]);
     $('#cardTwo').html(deckTwo[j]);
+    var k = 0;
     if(deckOne[i] > deckTwo[j])
     {
       move = deckTwo.shift(j);
@@ -55,11 +56,11 @@ console.log(deckOne, deckTwo);
       j += 2;
   }
     else{
-      $('#cardOne').html(deckOne[i] + ' ' + deckOne[i+1] + ' ' + deckOne[i+2] +
+      $('#cardOne').html(deckOne[i+k] + ' ' + deckOne[i+k+1] + ' ' + deckOne[i+k+2] +
       ' ' + deckOne[i+3]);
-      $('#cardTwo').html(deckTwo[j] + ' ' + deckTwo[j+1] + ' ' + deckTwo[j+2] +
+      $('#cardTwo').html(deckTwo[j+k] + ' ' + deckTwo[j+k+1] + ' ' + deckTwo[j+k+2] +
       ' ' + deckTwo[j+3]);
-      if(deckOne[i+3] > deckTwo[j+3])
+      if(deckOne[i+k+2] > deckTwo[j+K+2])
       {
         move = deckTwo.shift(j);
         deckOne.splice(1,0,move);
@@ -72,7 +73,7 @@ console.log(deckOne, deckTwo);
         i += 2;
 
       }
-      else if(deckOne[i] < deckTwo[j]){
+      else if(deckOne[i+k+2] < deckTwo[j+k+2]){
         move = deckOne.shift(i);
         deckTwo.splice(1,0,move);
         move = deckOne.shift(i+1);
@@ -84,8 +85,8 @@ console.log(deckOne, deckTwo);
         j += 2;
     }
     else{
-      i++;
-      j++;
+      k+=3;
+
     }
     }
     console.log(deckOne);
