@@ -14,13 +14,16 @@ $(document).ready(function(){
   //begin a new game of war
   $('#newGame').on('click',function(){
     console.log('in newGame');
+    //calls shuffle to randomize the deck array
     deck = shuffle(deck);
+    //finds middle of deck
     var split = Math.ceil(deck.length / 2);
+    //split deck in two equal decks
 deckOne = deck.splice(0,split);
 deckTwo = deck;
 console.log(deckOne, deckTwo);
   });
-
+//start new round
   $('.flip').on('click', function(){
     console.log('in flip');
     var move;
@@ -28,19 +31,23 @@ console.log(deckOne, deckTwo);
     console.log(j);
     console.log(deckOne.length);
     console.log(deckTwo.length);
+    //checks to make sure i is less the deckOne.length
     if(i + 2 >= deckOne.length)
     {
       console.log('reset deckOne');
       i = 0;
     }
+    //checks to make sure j is less the deckOne.length
     if(j + 2 >= deckTwo.length)
     {
       console.log('reset deckTwo');
       j = 0;
     }
+    //display both cards
     $('#cardOne').html(deckOne[i]);
     $('#cardTwo').html(deckTwo[j]);
     var k = 0;
+    //multiple if statements to check which card from deck wins
     if(deckOne[i] > deckTwo[j])
     {
       move = deckTwo.shift(j);
@@ -56,6 +63,7 @@ console.log(deckOne, deckTwo);
       j += 2;
   }
     else{
+      //check for war
       $('#cardOne').html(deckOne[i+k] + ' ' + deckOne[i+k+1] + ' ' + deckOne[i+k+2] +
       ' ' + deckOne[i+3]);
       $('#cardTwo').html(deckTwo[j+k] + ' ' + deckTwo[j+k+1] + ' ' + deckTwo[j+k+2] +
@@ -91,6 +99,7 @@ console.log(deckOne, deckTwo);
     }
     console.log(deckOne);
     console.log(deckTwo);
+    //calls check to see if there is a winner
     checkWinner();
   });
 });
@@ -107,6 +116,7 @@ function shuffle(deck){
     }
     return deck;
   }
+  //checks to see if one of the deck arrays equal 0
   function checkWinner(){
     if(deckOne <= 0){
       console.log('player two wins');
