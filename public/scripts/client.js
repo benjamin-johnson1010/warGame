@@ -70,13 +70,13 @@ console.log(deckOne, deckTwo);
       ' ' + deckTwo[j+3]);
       if(deckOne[i+k+2] > deckTwo[j+K+2])
       {
-        move = deckTwo.shift(j);
+        move = deckTwo.shift(j, j+1);
         deckOne.splice(1,0,move);
         move = deckTwo.shift(j+1);
+        deckOne.splice(1,0,move);
         move = deckTwo.shift(j+2);
         deckOne.splice(1,0,move);
         move = deckTwo.shift(j+3);
-        deckOne.splice(1,0,move);
         deckOne.splice(1,0,move);
         i += 2;
 
